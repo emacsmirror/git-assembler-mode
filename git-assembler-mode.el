@@ -101,7 +101,7 @@
      ("^\\s-*\\(target\\)"
       (1 'git-assembler-command-face)
       ;; branches
-      ("\\s-+\\(\\(\\sw+/\\)?\\sw+\\)" nil nil (1 'git-assembler-branch-face))))))
+      ("\\s-+\\(\\sw+\\)" nil nil (1 'git-assembler-target-face))))))
 
 (provide 'git-assembler-mode)
 
