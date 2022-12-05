@@ -80,6 +80,7 @@
 
   ;; extra branch chars
   (modify-syntax-entry ?_ "w")
+  (modify-syntax-entry ?* "w")
 
   (font-lock-add-keywords
    nil
