@@ -90,11 +90,11 @@
       (1 'git-assembler-command-face)
       (2 'git-assembler-target-face)
       ;; branches
-      ("\\s-+\\(\\(\\sw+/\\)?\\S-+\\)" nil nil
+      ("\\s-+\\(\\(\\(?:\\sw+/\\)+\\)?\\S-+\\)" nil nil
        (1 'git-assembler-branch-face)
        (2 'git-assembler-origin-face prepend t)))
      ;; commands with TARGET BASE syntax
-     ("^\\s-*\\(base\\|rebase\\|stage\\)\\s-+\\(\\S-+\\)\\s-+\\(\\(\\sw+/\\)?\\S-+\\)"
+     ("^\\s-*\\(base\\|rebase\\|stage\\)\\s-+\\(\\S-+\\)\\s-+\\(\\(\\(?:\\sw+/\\)+\\)?\\S-+\\)"
       (1 'git-assembler-command-face)
       (2 'git-assembler-target-face)
       (3 'git-assembler-base-face)
