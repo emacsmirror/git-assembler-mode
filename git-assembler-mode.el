@@ -75,15 +75,17 @@
   "Major mode for git-assembler configuration files."
 
   ;; comments
-  (modify-syntax-entry ?\# "<")
-  (modify-syntax-entry ?\n ">")
+  (setq-local comment-start "#"
+              comment-end "")
 
   ;; extra branch chars
   (modify-syntax-entry ?_ "w")
 
   (font-lock-add-keywords
    nil
-   '(;; commands with TARGET BRANCH* syntax
+   '(;; comments
+     ("#[^\n]*" . 'font-lock-comment-face)
+     ;; commands with TARGET BRANCH* syntax
      ("^\\s-*\\(merge\\)\\s-+\\(\\sw+\\)"
       (1 'git-assembler-command-face)
       (2 'git-assembler-target-face)
