@@ -86,15 +86,15 @@
    '(;; comments
      ("#[^\n]*" . 'font-lock-comment-face)
      ;; commands with TARGET BRANCH* syntax
-     ("^\\s-*\\(merge\\)\\s-+\\(\\sw+\\)"
+     ("^\\s-*\\(merge\\)\\s-+\\(\\S-+\\)"
       (1 'git-assembler-command-face)
       (2 'git-assembler-target-face)
       ;; branches
-      ("\\s-+\\(\\(\\sw+/\\)?\\sw+\\)" nil nil
+      ("\\s-+\\(\\(\\sw+/\\)?\\S-+\\)" nil nil
        (1 'git-assembler-branch-face)
        (2 'git-assembler-origin-face prepend t)))
      ;; commands with TARGET BASE syntax
-     ("^\\s-*\\(base\\|rebase\\|stage\\)\\s-+\\(\\sw+\\)\\s-+\\(\\(\\sw+/\\)?\\sw+\\)"
+     ("^\\s-*\\(base\\|rebase\\|stage\\)\\s-+\\(\\S-+\\)\\s-+\\(\\(\\sw+/\\)?\\S-+\\)"
       (1 'git-assembler-command-face)
       (2 'git-assembler-target-face)
       (3 'git-assembler-base-face)
@@ -103,7 +103,7 @@
      ("^\\s-*\\(target\\)"
       (1 'git-assembler-command-face)
       ;; branches
-      ("\\s-+\\(\\sw+\\)" nil nil (1 'git-assembler-target-face))))))
+      ("\\s-+\\(\\S-+\\)" nil nil (1 'git-assembler-target-face))))))
 
 (provide 'git-assembler-mode)
 
