@@ -86,9 +86,10 @@
    '(;; comments
      ("#[^\n]*" . 'font-lock-comment-face)
      ;; commands with TARGET BRANCH* syntax
-     ("^\\s-*\\(merge\\)\\s-+\\(\\S-+\\)"
+     ("^\\s-*\\(merge\\)\\s-+\\(\\(\\(?:\\sw+/\\)+\\)?\\S-+\\)"
       (1 'git-assembler-command-face)
       (2 'git-assembler-target-face)
+      (3 'git-assembler-origin-face prepend t)
       ;; branches
       ("\\s-+\\(\\(\\(?:\\sw+/\\)+\\)?\\S-+\\)" nil nil
        (1 'git-assembler-branch-face)
