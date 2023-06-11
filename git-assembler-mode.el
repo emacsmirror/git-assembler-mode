@@ -66,6 +66,11 @@
   "Face attributes used for highlighting a branch origin."
   :group 'git-assembler-faces)
 
+(defface git-assembler-flags-face
+  '((t :inherit font-lock-constant-face))
+  "Face used for git flags."
+  :group 'git-assembler-faces)
+
 
 
 ;; Mode
@@ -85,29 +90,49 @@
   (font-lock-add-keywords
    nil
    '(;; comments
-     ("#[^\n]*" . 'font-lock-comment-face)
-     ;; commands with TARGET BRANCH* syntax
+     ("#.*" . 'font-lock-comment-face)
+     ;; commands with TARGET BRANCH* -FLAGS* syntax
      ("^\\s-*\\(merge\\)\\s-+\\(\\(\\(?:\\sw+/\\)+\\)?\\S-+\\)"
       (1 'git-assembler-command-face)
       (2 'git-assembler-target-face)
       (3 'git-assembler-origin-face prepend t)
       ;; branches
-      ("\\s-+\\(\\(\\(?:\\sw+/\\)+\\)?\\S-+\\)" nil nil
+      ("\\=\\s-+\\(\\(\\(?:[^-\\Sw]\\sw*/\\)+\\)?[^-\\s-]\\S-*\\)" nil nil
        (1 'git-assembler-branch-face)
-       (2 'git-assembler-origin-face prepend t)))
+       (2 'git-assembler-origin-face prepend t))
+      ;; flags
+      ("\\=\\s-+\\(-[^#]*\\)" nil nil
+       (1 'git-assembler-flags-face)))
      ;; commands with TARGET BASE syntax
-     ("^\\s-*\\(base\\|rebase\\|stage\\)\\s-+\\(\\S-+\\)\\s-+\\(\\(\\(?:\\sw+/\\)+\\)?\\S-+\\)"
+     ("^\\s-*\\(base\\|stage\\)\\s-+\\(\\S-+\\)\\s-+\\(\\(\\(?:\\sw+/\\)+\\)?\\S-+\\)"
       (1 'git-assembler-command-face)
       (2 'git-assembler-target-face)
       (3 'git-assembler-base-face)
       (4 'git-assembler-origin-face prepend t))
+     ;; commands with TARGET BASE -FLAGS* syntax
+     ("^\\s-*\\(rebase\\)\\s-+\\(\\S-+\\)\\s-+\\(\\(\\(?:\\sw+/\\)+\\)?\\S-+\\)"
+      (1 'git-assembler-command-face)
+      (2 'git-assembler-target-face)
+      (3 'git-assembler-base-face)
+      (4 'git-assembler-origin-face prepend t)
+      ;; flags
+      ("\\=\\s-+\\(-[^#]*\\)" nil nil
+       (1 'git-assembler-flags-face)))
+
      ;; commands with BRANCH* syntax
      ("^\\s-*\\(target\\)"
       (1 'git-assembler-command-face)
       ;; branches
-      ("\\s-+\\(\\(\\(?:\\sw+/\\)+\\)?\\S-+\\)" nil nil
+      ("\\=\\s-+\\(\\(\\(?:\\sw+/\\)+\\)?\\S-+\\)" nil nil
        (1 'git-assembler-target-face)
-       (2 'git-assembler-origin-face prepend t))))))
+       (2 'git-assembler-origin-face prepend t)))
+     ;; flags
+     ("^\\s-*\\(flags\\)\\s-+\\(merge\\|rebase\\)\\>"
+      (1 'git-assembler-command-face)
+      (2 'git-assembler-command-face)
+      ;; flags
+      ("\\=\\s-+\\(-[^#]*\\)" nil nil
+       (1 'git-assembler-flags-face prepend))))))
 
 (provide 'git-assembler-mode)
 
