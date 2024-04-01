@@ -11,4 +11,4 @@ This package is fully documented in the source and maintained through MELPA:
 
 https://melpa.org/#/git-assembler-mode
 
-.. _git-assembler: https://www.thregr.org/~wavexx/software/git-assembler/
+.. _git-assembler: https://www.thregr.org/wavexx/software/git-assembler/
